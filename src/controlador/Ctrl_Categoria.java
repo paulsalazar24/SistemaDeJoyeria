@@ -1,13 +1,21 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package controlador;
 
-/**
- *
- * @author 32074212
- */
+import java.sql.Connection;
+import modelo.Categoria;
+import java.sql.SQLException;
+
+
 public class Ctrl_Categoria {
+    
+    public boolean guardar(Categoria objeto){
+        boolean respuesta = false;
+        Connection cn = conexion.Conexion.conectar();
+        try {
+            
+        } catch (SQLException e) {
+            System.out.println("Error al guardar categoria: " + e);
+        }
+        
+    }
     
 }
