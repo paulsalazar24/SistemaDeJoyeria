@@ -75,7 +75,7 @@ public class InterCategoria extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(null, "Complete todos los campos");
         } else {
 
-            if (controladorCategoria.existeCategoria(txt_descripcion.getText().trim())) {
+            if (!controladorCategoria.existeCategoria(txt_descripcion.getText().trim())) {
                 categoria.setDescripcion(txt_descripcion.getText().trim());
                 categoria.setEstado(1);
 

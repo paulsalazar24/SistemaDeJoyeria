@@ -1,16 +1,16 @@
 package vista;
 
-import com.mysql.jdbc.PreparedStatement;
-import java.sql.Statement;
 import conexion.Conexion;
-import java.sql.Connection;
 import java.awt.Dimension;
 import java.awt.event.MouseAdapter;
-import javax.swing.table.DefaultTableModel;
-import java.sql.SQLException;
+import java.awt.event.MouseEvent;
+import java.sql.Connection;
 import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import javax.swing.JTable;
-import org.w3c.dom.events.MouseEvent;
+import javax.swing.table.DefaultTableModel;
+import java.sql.PreparedStatement;
 
 public class InterGestionarCategoria extends javax.swing.JInternalFrame {
 
@@ -187,16 +187,19 @@ public class InterGestionarCategoria extends javax.swing.JInternalFrame {
 
     }
     
-    public void EnviarDatosCategoriaSeleccionada(idCategoria){
-        
+   private void EnviarDatosCategoriaSeleccionada(int idCategoria) {
         try {
-             Connection con = Conexion.conectar();
-             PreparedStatement
-            
+            Connection con = Conexion.conectar();
+            PreparedStatement pst = con.prepareStatement(
+                    "select * from tb_categoria where idCategoria = '" + idCategoria + "'");
+            ResultSet rs = pst.executeQuery();
+            if (rs.next()) {
+                txt_descripcion.setText(rs.getString("descripcion"));
+            }
+            con.close();
         } catch (SQLException e) {
-            System.err.println("Error al seleccionar categoria: " + e);
-        }
-        
+            System.out.println("Error al seleccionar categoria: " + e);
+        } 
     }
 
 }
