@@ -258,7 +258,9 @@ public class FrmMenu extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem_gestionar_ventasActionPerformed
 
     private void jMenuItem_gestionar_productoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem_gestionar_productoActionPerformed
-        // TODO add your handling code here:
+      InterGestionarProducto interGestionarProducto = new InterGestionarProducto();
+        jDesktopPane_menu.add(interGestionarProducto);
+        interGestionarProducto.setVisible(true);
     }//GEN-LAST:event_jMenuItem_gestionar_productoActionPerformed
 
     private void jMenuItem_nueva_categoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem_nueva_categoriaActionPerformed
