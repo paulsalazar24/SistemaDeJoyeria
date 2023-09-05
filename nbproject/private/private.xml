@@ -3,7 +3,11 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+            <file>file:/C:/laragon/www/SistemaDeJoyeria/src/modelo/Producto.java</file>
+            <file>file:/C:/laragon/www/SistemaDeJoyeria/src/controlador/Ctrl_Categoria.java</file>
+            <file>file:/C:/laragon/www/SistemaDeJoyeria/src/controlador/Ctrl_Producto.java</file>
             <file>file:/C:/laragon/www/SistemaDeJoyeria/src/vista/InterGestionarProducto.java</file>
+            <file>file:/C:/laragon/www/SistemaDeJoyeria/src/vista/InterProducto.java</file>
         </group>
     </open-files>
 </project-private>
