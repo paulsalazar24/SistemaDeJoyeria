@@ -188,6 +188,11 @@ public class FrmMenu extends javax.swing.JFrame {
         jMenuItem_cerrar_sesion.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jMenuItem_cerrar_sesion.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/cerrar-sesion.png"))); // NOI18N
         jMenuItem_cerrar_sesion.setText("Cerrar Sesión");
+        jMenuItem_cerrar_sesion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem_cerrar_sesionActionPerformed(evt);
+            }
+        });
         jMenu9.add(jMenuItem_cerrar_sesion);
 
         jMenuBar1.add(jMenu9);
@@ -228,6 +233,10 @@ public class FrmMenu extends javax.swing.JFrame {
        jDesktopPane_menu.add(interGestionarCategoria);
        interGestionarCategoria.setVisible(true);
     }//GEN-LAST:event_jMenuItem_gestionar_categoriaActionPerformed
+
+    private void jMenuItem_cerrar_sesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem_cerrar_sesionActionPerformed
+      this.dispose();
+    }//GEN-LAST:event_jMenuItem_cerrar_sesionActionPerformed
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
