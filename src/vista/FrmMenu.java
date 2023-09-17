@@ -47,13 +47,6 @@ public class FrmMenu extends javax.swing.JFrame {
         jMenu5 = new javax.swing.JMenu();
         jMenuItem_nueva_venta = new javax.swing.JMenuItem();
         jMenuItem_gestionar_ventas = new javax.swing.JMenuItem();
-        jMenu7 = new javax.swing.JMenu();
-        jMenuItem_reportes_clientes = new javax.swing.JMenuItem();
-        jMenuItem_reportes_categorias = new javax.swing.JMenuItem();
-        jMenuItem_reportes_productos = new javax.swing.JMenuItem();
-        jMenuItem_reportes_ventas = new javax.swing.JMenuItem();
-        jMenu8 = new javax.swing.JMenu();
-        jMenuItem_ver_historial = new javax.swing.JMenuItem();
         jMenu9 = new javax.swing.JMenu();
         jMenuItem_cerrar_sesion = new javax.swing.JMenuItem();
 
@@ -186,45 +179,6 @@ public class FrmMenu extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenu5);
 
-        jMenu7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/reportes.png"))); // NOI18N
-        jMenu7.setText("Reportes");
-        jMenu7.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
-        jMenu7.setPreferredSize(new java.awt.Dimension(150, 50));
-
-        jMenuItem_reportes_clientes.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jMenuItem_reportes_clientes.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/reporte1.png"))); // NOI18N
-        jMenuItem_reportes_clientes.setText("Reportes Clientes");
-        jMenu7.add(jMenuItem_reportes_clientes);
-
-        jMenuItem_reportes_categorias.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jMenuItem_reportes_categorias.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/reporte1.png"))); // NOI18N
-        jMenuItem_reportes_categorias.setText("Reportes Categorias ");
-        jMenu7.add(jMenuItem_reportes_categorias);
-
-        jMenuItem_reportes_productos.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jMenuItem_reportes_productos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/reporte1.png"))); // NOI18N
-        jMenuItem_reportes_productos.setText("Reportes Productos");
-        jMenu7.add(jMenuItem_reportes_productos);
-
-        jMenuItem_reportes_ventas.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jMenuItem_reportes_ventas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/reporte1.png"))); // NOI18N
-        jMenuItem_reportes_ventas.setText("Reportes Ventas");
-        jMenu7.add(jMenuItem_reportes_ventas);
-
-        jMenuBar1.add(jMenu7);
-
-        jMenu8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/historial1.png"))); // NOI18N
-        jMenu8.setText("Historial");
-        jMenu8.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
-        jMenu8.setPreferredSize(new java.awt.Dimension(150, 50));
-
-        jMenuItem_ver_historial.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jMenuItem_ver_historial.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/historial1.png"))); // NOI18N
-        jMenuItem_ver_historial.setText("Ver Historial");
-        jMenu8.add(jMenuItem_ver_historial);
-
-        jMenuBar1.add(jMenu8);
-
         jMenu9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/cerrar-sesion.png"))); // NOI18N
         jMenu9.setText("Cerrar Sesión");
         jMenu9.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
@@ -313,8 +267,6 @@ public class FrmMenu extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu4;
     private javax.swing.JMenu jMenu5;
     private javax.swing.JMenu jMenu6;
-    private javax.swing.JMenu jMenu7;
-    private javax.swing.JMenu jMenu8;
     private javax.swing.JMenu jMenu9;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem14;
@@ -330,10 +282,5 @@ public class FrmMenu extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem_nuevo_cliente;
     private javax.swing.JMenuItem jMenuItem_nuevo_producto;
     private javax.swing.JMenuItem jMenuItem_nuevo_usuario;
-    private javax.swing.JMenuItem jMenuItem_reportes_categorias;
-    private javax.swing.JMenuItem jMenuItem_reportes_clientes;
-    private javax.swing.JMenuItem jMenuItem_reportes_productos;
-    private javax.swing.JMenuItem jMenuItem_reportes_ventas;
-    private javax.swing.JMenuItem jMenuItem_ver_historial;
     // End of variables declaration//GEN-END:variables
 }

@@ -357,7 +357,7 @@ public class InterGestionarProducto extends javax.swing.JInternalFrame {
     private void CargarTablaProducto() {
         Connection con = Conexion.conectar();
         DefaultTableModel model = new DefaultTableModel();
-        String sql = "select p.idProducto, p.nombre, p.cantidad, p.precio , p.descripcion, p.porcentajeIva, c.descripcion, p.estado from tb_producto As p, tb_categoria As c where p.idCategoria = c.idCategoria;";
+        String sql = "select p.idProducto, p.nombre, p.cantidad, p.precio , p.descripcion, p.porcentajeIgv, c.descripcion, p.estado from tb_producto As p, tb_categoria As c where p.idCategoria = c.idCategoria;";
         Statement st;
 
         try {
@@ -377,7 +377,7 @@ public class InterGestionarProducto extends javax.swing.JInternalFrame {
 
             while (rs.next()) {
                 precio = rs.getDouble("precio");
-                porcentajeIgv = rs.getInt("porcentajeIva");
+                porcentajeIgv = rs.getInt("porcentajeIgv");
 
                 Object fila[] = new Object[8];
 
@@ -446,7 +446,7 @@ public class InterGestionarProducto extends javax.swing.JInternalFrame {
                 txt_cantidad.setText(rs.getString("cantidad"));
                 txt_precio.setText(rs.getString("precio"));
                 txt_descripcion.setText(rs.getString("descripcion"));
-                int igv = rs.getInt("porcentajeIva");
+                int igv = rs.getInt("porcentajeIgv");
                 switch (igv) {
                     case 0 ->
                         jComboBox_igv.setSelectedItem("Sin IGV");
