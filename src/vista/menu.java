@@ -45,7 +45,7 @@ public class menu extends javax.swing.JFrame {
         jLabel9 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         panelUsuario = new javax.swing.JPanel();
-        btnNuvUser = new javax.swing.JLabel();
+        btnNuevoUsuario = new javax.swing.JLabel();
         btnGestUser = new javax.swing.JLabel();
         jSeparator3 = new javax.swing.JSeparator();
         panelProducto = new javax.swing.JPanel();
@@ -55,7 +55,7 @@ public class menu extends javax.swing.JFrame {
         jSeparator7 = new javax.swing.JSeparator();
         panelCliente = new javax.swing.JPanel();
         jSeparator4 = new javax.swing.JSeparator();
-        jLabel6 = new javax.swing.JLabel();
+        btnNuevoCliente = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         panelCategoria = new javax.swing.JPanel();
         jSeparator5 = new javax.swing.JSeparator();
@@ -209,10 +209,15 @@ public class menu extends javax.swing.JFrame {
 
         panelUsuario.setBackground(new java.awt.Color(153, 153, 153));
 
-        btnNuvUser.setFont(new java.awt.Font("Arial Black", 1, 14)); // NOI18N
-        btnNuvUser.setForeground(new java.awt.Color(255, 255, 255));
-        btnNuvUser.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/gestionar.png"))); // NOI18N
-        btnNuvUser.setText("Nuevo usuario");
+        btnNuevoUsuario.setFont(new java.awt.Font("Arial Black", 1, 14)); // NOI18N
+        btnNuevoUsuario.setForeground(new java.awt.Color(255, 255, 255));
+        btnNuevoUsuario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/gestionar.png"))); // NOI18N
+        btnNuevoUsuario.setText("Nuevo usuario");
+        btnNuevoUsuario.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnNuevoUsuarioMouseClicked(evt);
+            }
+        });
 
         btnGestUser.setBackground(new java.awt.Color(255, 255, 255));
         btnGestUser.setFont(new java.awt.Font("Arial Black", 1, 14)); // NOI18N
@@ -226,7 +231,7 @@ public class menu extends javax.swing.JFrame {
             panelUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelUsuarioLayout.createSequentialGroup()
                 .addGap(119, 119, 119)
-                .addComponent(btnNuvUser, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnNuevoUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 159, Short.MAX_VALUE)
                 .addComponent(btnGestUser, javax.swing.GroupLayout.PREFERRED_SIZE, 233, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(42, 42, 42))
@@ -237,7 +242,7 @@ public class menu extends javax.swing.JFrame {
             .addGroup(panelUsuarioLayout.createSequentialGroup()
                 .addGap(48, 48, 48)
                 .addGroup(panelUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnNuvUser)
+                    .addComponent(btnNuevoUsuario)
                     .addComponent(btnGestUser, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(36, 36, 36)
                 .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -304,10 +309,15 @@ public class menu extends javax.swing.JFrame {
 
         panelCliente.setBackground(new java.awt.Color(153, 153, 153));
 
-        jLabel6.setFont(new java.awt.Font("Arial Black", 1, 14)); // NOI18N
-        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/nuevoCli.png"))); // NOI18N
-        jLabel6.setText("Nuevo cliente");
+        btnNuevoCliente.setFont(new java.awt.Font("Arial Black", 1, 14)); // NOI18N
+        btnNuevoCliente.setForeground(new java.awt.Color(255, 255, 255));
+        btnNuevoCliente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/nuevoCli.png"))); // NOI18N
+        btnNuevoCliente.setText("Nuevo cliente");
+        btnNuevoCliente.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnNuevoClienteMouseClicked(evt);
+            }
+        });
 
         jLabel7.setFont(new java.awt.Font("Arial Black", 1, 14)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(255, 255, 255));
@@ -323,7 +333,7 @@ public class menu extends javax.swing.JFrame {
                 .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(panelClienteLayout.createSequentialGroup()
                 .addGap(127, 127, 127)
-                .addComponent(jLabel6)
+                .addComponent(btnNuevoCliente)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel7)
                 .addGap(116, 116, 116))
@@ -333,7 +343,7 @@ public class menu extends javax.swing.JFrame {
             .addGroup(panelClienteLayout.createSequentialGroup()
                 .addGap(40, 40, 40)
                 .addGroup(panelClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel6)
+                    .addComponent(btnNuevoCliente)
                     .addComponent(jLabel7))
                 .addGap(43, 43, 43)
                 .addComponent(jSeparator4, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -571,6 +581,17 @@ public class menu extends javax.swing.JFrame {
         gestionarProducto.setVisible(true);
     }//GEN-LAST:event_btnGestionarProductoMouseClicked
 
+    private void btnNuevoUsuarioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnNuevoUsuarioMouseClicked
+        // TODO add your handling code here:}
+
+    }//GEN-LAST:event_btnNuevoUsuarioMouseClicked
+
+    private void btnNuevoClienteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnNuevoClienteMouseClicked
+        // TODO add your handling code here:
+        nuevoCliente nuevoCliente = new nuevoCliente();
+        nuevoCliente.setVisible(true);
+    }//GEN-LAST:event_btnNuevoClienteMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -615,7 +636,8 @@ public class menu extends javax.swing.JFrame {
     private javax.swing.JLabel btnGestionarCategoria;
     private javax.swing.JLabel btnGestionarProducto;
     private javax.swing.JLabel btnNuevaCategoria;
-    private javax.swing.JLabel btnNuvUser;
+    private javax.swing.JLabel btnNuevoCliente;
+    private javax.swing.JLabel btnNuevoUsuario;
     private javax.swing.JLabel btnProducto;
     private javax.swing.JLabel btnSalir;
     private javax.swing.JLabel btnUsuario;
@@ -625,7 +647,6 @@ public class menu extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
