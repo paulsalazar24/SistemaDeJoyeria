@@ -277,6 +277,11 @@ public class menu extends javax.swing.JFrame {
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/actualizarStock.png"))); // NOI18N
         jLabel5.setText("Actualizar stock");
+        jLabel5.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel5MouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout panelProductoLayout = new javax.swing.GroupLayout(panelProducto);
         panelProducto.setLayout(panelProductoLayout);
@@ -323,6 +328,11 @@ public class menu extends javax.swing.JFrame {
         jLabel7.setForeground(new java.awt.Color(255, 255, 255));
         jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/gestionarCli.png"))); // NOI18N
         jLabel7.setText("Gestionar cliente");
+        jLabel7.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel7MouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout panelClienteLayout = new javax.swing.GroupLayout(panelCliente);
         panelCliente.setLayout(panelClienteLayout);
@@ -591,6 +601,18 @@ public class menu extends javax.swing.JFrame {
         nuevoCliente nuevoCliente = new nuevoCliente();
         nuevoCliente.setVisible(true);
     }//GEN-LAST:event_btnNuevoClienteMouseClicked
+
+    private void jLabel7MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel7MouseClicked
+        // TODO add your handling code here:
+        gestionarCliente  gestionarCliente = new gestionarCliente();
+        gestionarCliente.setVisible(true);
+    }//GEN-LAST:event_jLabel7MouseClicked
+
+    private void jLabel5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel5MouseClicked
+        // TODO add your handling code here:
+        actualizarStock actualizarStock = new actualizarStock();
+        actualizarStock.setVisible(true);
+    }//GEN-LAST:event_jLabel5MouseClicked
 
     /**
      * @param args the command line arguments

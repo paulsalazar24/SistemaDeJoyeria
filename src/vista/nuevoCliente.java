@@ -1,22 +1,20 @@
 package vista;
 
+import controlador.Ctrl_Cliente;
+import java.awt.Color;
 import java.awt.Dimension;
-
+import javax.swing.JOptionPane;
+import modelo.Cliente;
 
 public class nuevoCliente extends javax.swing.JFrame {
-
-
 
     public nuevoCliente() {
         initComponents();
         this.setSize(new Dimension(400, 300));
         this.setTitle("Nuevo cliente");
-         setLocationRelativeTo(null);
+        setLocationRelativeTo(null);
         setResizable(false);
-  
-        
-        
-        
+
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
     }
 
@@ -37,7 +35,7 @@ public class nuevoCliente extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         txt_nombre = new javax.swing.JTextField();
         txt_apellido = new javax.swing.JTextField();
-        txt_dni = new javax.swing.JTextField();
+        txt_cedula = new javax.swing.JTextField();
         txt_direccion = new javax.swing.JTextField();
         txt_telefono = new javax.swing.JTextField();
         jButton_Guardar = new javax.swing.JButton();
@@ -91,10 +89,10 @@ public class nuevoCliente extends javax.swing.JFrame {
         txt_apellido.setForeground(new java.awt.Color(0, 0, 0));
         getContentPane().add(txt_apellido, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 80, 170, -1));
 
-        txt_dni.setBackground(new java.awt.Color(255, 255, 255));
-        txt_dni.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        txt_dni.setForeground(new java.awt.Color(0, 0, 0));
-        getContentPane().add(txt_dni, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 110, 170, -1));
+        txt_cedula.setBackground(new java.awt.Color(255, 255, 255));
+        txt_cedula.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        txt_cedula.setForeground(new java.awt.Color(0, 0, 0));
+        getContentPane().add(txt_cedula, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 110, 170, -1));
 
         txt_direccion.setBackground(new java.awt.Color(255, 255, 255));
         txt_direccion.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
@@ -135,7 +133,47 @@ public class nuevoCliente extends javax.swing.JFrame {
 
     private void jButton_GuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_GuardarActionPerformed
 
-        
+        Cliente cliente = new Cliente();
+        Ctrl_Cliente controlCliente = new Ctrl_Cliente();
+        if (!txt_nombre.getText().isEmpty() && !txt_apellido.getText().isEmpty() && !txt_apellido.getText().isEmpty()) {
+            // JOptionPane.showMessageDialog(null, "Correcto");
+            if (!controlCliente.existeCliente(txt_cedula.getText().trim())) {
+
+                cliente.setNombre(txt_nombre.getText().trim());
+                cliente.setApellido(txt_apellido.getText().trim());
+                cliente.setCedula(txt_cedula.getText().trim());
+                cliente.setTelefono(txt_telefono.getText().trim());
+                cliente.setDireccion(txt_direccion.getText().trim());
+                cliente.setEstado(1);
+
+                if (controlCliente.guardar(cliente)) {
+                    JOptionPane.showMessageDialog(null, "Registro guardado");
+                    txt_nombre.setBackground(Color.green);
+                    txt_apellido.setBackground(Color.green);
+                    txt_cedula.setBackground(Color.green);
+                    txt_telefono.setBackground(Color.green);
+                    txt_direccion.setBackground(Color.green);
+                } else {
+                    JOptionPane.showMessageDialog(null, "Error al guardar");
+                }
+            } else {
+                JOptionPane.showMessageDialog(null, "El cliente ya esta registrado en la base de datos");
+                txt_nombre.setBackground(Color.white);
+                txt_apellido.setBackground(Color.white);
+                txt_cedula.setBackground(Color.white);
+                txt_telefono.setBackground(Color.white);
+                txt_direccion.setBackground(Color.white);
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "Complete los campos");
+            txt_nombre.setBackground(Color.red);
+            txt_apellido.setBackground(Color.red);
+            txt_cedula.setBackground(Color.red);
+            txt_telefono.setBackground(Color.red);
+            txt_direccion.setBackground(Color.red);
+        }
+        //metodo limpiar
+        this.Limpiar();
     }//GEN-LAST:event_jButton_GuardarActionPerformed
 
     private void txt_telefonoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_telefonoActionPerformed
@@ -192,8 +230,8 @@ public class nuevoCliente extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel_wallpaper;
     private javax.swing.JTextField txt_apellido;
+    private javax.swing.JTextField txt_cedula;
     private javax.swing.JTextField txt_direccion;
-    private javax.swing.JTextField txt_dni;
     private javax.swing.JTextField txt_nombre;
     private javax.swing.JTextField txt_telefono;
     // End of variables declaration//GEN-END:variables
@@ -202,11 +240,9 @@ public class nuevoCliente extends javax.swing.JFrame {
     private void Limpiar() {
         txt_nombre.setText("");
         txt_apellido.setText("");
-        txt_dni.setText("");
+        txt_cedula.setText("");
         txt_telefono.setText("");
         txt_direccion.setText("");
     }
-
-   
 
 }
