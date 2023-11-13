@@ -1,18 +1,8 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package vista;
 
-/**
- *
- * @author quisp
- */
+
 public class menu extends javax.swing.JFrame {
 
-    /**
-     * Creates new form menu
-     */
     public menu() {
         initComponents();
         setLocationRelativeTo(null);
@@ -224,6 +214,11 @@ public class menu extends javax.swing.JFrame {
         btnGestUser.setForeground(new java.awt.Color(255, 255, 255));
         btnGestUser.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/registro.png"))); // NOI18N
         btnGestUser.setText("Gestionar usuarios");
+        btnGestUser.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnGestUserMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout panelUsuarioLayout = new javax.swing.GroupLayout(panelUsuario);
         panelUsuario.setLayout(panelUsuarioLayout);
@@ -593,7 +588,8 @@ public class menu extends javax.swing.JFrame {
 
     private void btnNuevoUsuarioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnNuevoUsuarioMouseClicked
         // TODO add your handling code here:}
-
+        nuevoUsuario nuevoUsuario = new nuevoUsuario();
+        nuevoUsuario.setVisible(true);
     }//GEN-LAST:event_btnNuevoUsuarioMouseClicked
 
     private void btnNuevoClienteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnNuevoClienteMouseClicked
@@ -613,6 +609,12 @@ public class menu extends javax.swing.JFrame {
         actualizarStock actualizarStock = new actualizarStock();
         actualizarStock.setVisible(true);
     }//GEN-LAST:event_jLabel5MouseClicked
+
+    private void btnGestUserMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnGestUserMouseClicked
+        // TODO add your handling code here:
+        gestionarUsuario gestionarUsuario = new gestionarUsuario();
+        gestionarUsuario.setVisible(true);
+    }//GEN-LAST:event_btnGestUserMouseClicked
 
     /**
      * @param args the command line arguments

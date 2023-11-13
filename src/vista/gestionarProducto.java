@@ -1,9 +1,7 @@
 package vista;
 
 import conexion.Conexion;
-import controlador.Ctrl_Categoria;
 import controlador.Ctrl_Producto;
-import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.HeadlessException;
 import java.awt.event.MouseAdapter;
@@ -12,14 +10,11 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import java.sql.PreparedStatement;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
-import modelo.Categoria;
-import modelo.Categoria;
 import modelo.Producto;
 
 public class gestionarProducto extends javax.swing.JFrame {
