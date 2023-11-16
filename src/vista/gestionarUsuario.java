@@ -1,7 +1,7 @@
 package vista;
 
 import conexion.Conexion;
-import controlador.Ctrl_Cliente;
+import controlador.Ctrl_Usuario;
 import java.awt.Dimension;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -14,11 +14,11 @@ import java.sql.PreparedStatement;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
-import modelo.Cliente;
+import modelo.Usuario;
 
 public class gestionarUsuario extends javax.swing.JFrame {
 
-    private int idUsuario;
+    private int idUsuario = 0;
 
     public gestionarUsuario() {
         initComponents();
@@ -187,40 +187,47 @@ public class gestionarUsuario extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton_actualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_actualizarActionPerformed
-        if (txt_nombre.getText().isEmpty() && txt_apellido.getText().isEmpty() && txt_usuario.getText().isEmpty() && txt_password.getText().isEmpty() && txt_telefono.getText().isEmpty()) {
-            JOptionPane.showMessageDialog(null, "¡Complete todos los campos!");
+
+        Usuario usuario = new Usuario();
+        Ctrl_Usuario controlUsuario = new Ctrl_Usuario();
+        if (idUsuario == 0) {
+            JOptionPane.showMessageDialog(null, "¡Seleccione un usuario!");
         } else {
-            Cliente cliente = new Cliente();
-            Ctrl_Cliente controlCliente = new Ctrl_Cliente();
-
-            cliente.setNombre(txt_nombre.getText().trim());
-            cliente.setApellido(txt_apellido.getText().trim());
-            cliente.setCedula(txt_usuario.getText().trim());
-            cliente.setTelefono(txt_password.getText().trim());
-            cliente.setDireccion(txt_telefono.getText().trim());
-
-            if (controlCliente.actualizar(cliente, idUsuario)) {
-                JOptionPane.showMessageDialog(null, "¡Datos del cliente actualizados!");
-                this.CargarTablaUsuarios();
-                this.Limpiar();
+            if (txt_nombre.getText().isEmpty() || txt_apellido.getText().isEmpty() || txt_usuario.getText().isEmpty() || txt_password.getText().isEmpty() || txt_telefono.getText().isEmpty()) {
+                JOptionPane.showMessageDialog(null, "Completa todos los campos");
             } else {
-                JOptionPane.showMessageDialog(null, "¡Error al actualizar!");
+                usuario.setNombre(txt_nombre.getText().trim());
+                usuario.setApellido(txt_apellido.getText().trim());
+                usuario.setUsuario(txt_usuario.getText().trim());
+                usuario.setPassword(txt_password.getText().trim());
+                usuario.setTelefono(txt_telefono.getText().trim());
+                usuario.setEstado(1);
+                if (controlUsuario.actualizar(usuario, idUsuario)) {
+                    JOptionPane.showMessageDialog(null, "Actualizacion exitosa");
+                    this.Limpiar();
+                    this.CargarTablaUsuarios();
+                    idUsuario = 0;
+                } else {
+                    JOptionPane.showMessageDialog(null, "Error al actualizar usuario");
+                    this.Limpiar();
+                }
             }
         }
 
     }//GEN-LAST:event_jButton_actualizarActionPerformed
 
     private void jButton_eliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_eliminarActionPerformed
-        Ctrl_Cliente controlCliente = new Ctrl_Cliente();
+        Ctrl_Usuario controlUsuario = new Ctrl_Usuario();
         if (idUsuario == 0) {
-            JOptionPane.showMessageDialog(null, "¡Seleccione el cliente!");
+            JOptionPane.showMessageDialog(null, "¡Seleccione el usuario!");
         } else {
-            if (!controlCliente.eliminar(idUsuario)) {
-                JOptionPane.showMessageDialog(null, "¡Cliente eliminado!");
+            if (!controlUsuario.eliminar(idUsuario)) {
+                JOptionPane.showMessageDialog(null, "¡Usuario eliminado!");
                 this.CargarTablaUsuarios();
                 this.Limpiar();
+                idUsuario = 0;
             } else {
-                JOptionPane.showMessageDialog(null, "¡Error al eliminar cliente!");
+                JOptionPane.showMessageDialog(null, "¡Error al eliminar usuario!");
                 this.Limpiar();
             }
         }

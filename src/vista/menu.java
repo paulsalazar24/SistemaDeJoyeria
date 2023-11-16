@@ -411,6 +411,11 @@ public class menu extends javax.swing.JFrame {
         jLabel12.setForeground(new java.awt.Color(255, 255, 255));
         jLabel12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/nevaVenta.png"))); // NOI18N
         jLabel12.setText("Nueva venta");
+        jLabel12.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel12MouseClicked(evt);
+            }
+        });
 
         jLabel13.setFont(new java.awt.Font("Arial Black", 1, 14)); // NOI18N
         jLabel13.setForeground(new java.awt.Color(255, 255, 255));
@@ -615,6 +620,12 @@ public class menu extends javax.swing.JFrame {
         gestionarUsuario gestionarUsuario = new gestionarUsuario();
         gestionarUsuario.setVisible(true);
     }//GEN-LAST:event_btnGestUserMouseClicked
+
+    private void jLabel12MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel12MouseClicked
+        // TODO add your handling code here:
+        RegistrarVenta RegistrarVenta = new RegistrarVenta();
+        RegistrarVenta.setVisible(true);
+    }//GEN-LAST:event_jLabel12MouseClicked
 
     /**
      * @param args the command line arguments
