@@ -29,14 +29,15 @@ public class RegistrarVenta extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         // cargar tabla
         this.CargarComboCliente();
+        this.CargarComboProductos();
 
         setLocationRelativeTo(null);
         setResizable(false);
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         //insertar img en el label 
         // ImageIcon wallpaper = new ImageIcon("src/img/fondo3.jpg");
-         //Icon icono = new ImageIcon(wallpaper.getImage().getScaledInstance(844, 586, WIDTH));
-         //jLabel_wallpaper.setIcon(icono);
+        //Icon icono = new ImageIcon(wallpaper.getImage().getScaledInstance(844, 586, WIDTH));
+        //jLabel_wallpaper.setIcon(icono);
         // this.repaint();
     }
 
@@ -72,12 +73,12 @@ public class RegistrarVenta extends javax.swing.JFrame {
         jComboBox_cliente = new javax.swing.JComboBox<>();
         jComboBox_producto = new javax.swing.JComboBox<>();
         txt_cantidad = new javax.swing.JTextField();
-        txt_datosClientes = new javax.swing.JTextField();
+        txt_buscar_cliente = new javax.swing.JTextField();
         btn_agregarProdutco = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        btn_buscar = new javax.swing.JButton();
         jTextField1 = new javax.swing.JTextField();
         btn_registrarVenta = new javax.swing.JButton();
         jLabel12 = new javax.swing.JLabel();
@@ -170,7 +171,7 @@ public class RegistrarVenta extends javax.swing.JFrame {
                 btn_calcularCambioActionPerformed(evt);
             }
         });
-        jPanel3.add(btn_calcularCambio, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 210, -1, -1));
+        jPanel3.add(btn_calcularCambio, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 210, -1, 30));
 
         getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 20, 320, 250));
 
@@ -196,10 +197,10 @@ public class RegistrarVenta extends javax.swing.JFrame {
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 300, 750, 270));
 
         jComboBox_cliente.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione cliente:", "Item 1", "Item 2", "Item 3", "Item 4" }));
-        getContentPane().add(jComboBox_cliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 50, 150, 20));
+        getContentPane().add(jComboBox_cliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 50, 150, 30));
 
         jComboBox_producto.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione producto:", "Item 1", "Item 2", "Item 3", "Item 4" }));
-        getContentPane().add(jComboBox_producto, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 80, 150, 20));
+        getContentPane().add(jComboBox_producto, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 90, 150, 30));
 
         txt_cantidad.setBackground(new java.awt.Color(255, 255, 255));
         txt_cantidad.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
@@ -208,37 +209,42 @@ public class RegistrarVenta extends javax.swing.JFrame {
                 txt_cantidadActionPerformed(evt);
             }
         });
-        getContentPane().add(txt_cantidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 80, 70, -1));
+        getContentPane().add(txt_cantidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 90, 70, -1));
 
-        txt_datosClientes.setBackground(new java.awt.Color(255, 255, 255));
-        txt_datosClientes.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        getContentPane().add(txt_datosClientes, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 50, 170, 20));
+        txt_buscar_cliente.setBackground(new java.awt.Color(255, 255, 255));
+        txt_buscar_cliente.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        getContentPane().add(txt_buscar_cliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 50, 170, -1));
 
         btn_agregarProdutco.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         btn_agregarProdutco.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/calcularPro.png"))); // NOI18N
         btn_agregarProdutco.setText("Añadir producto ");
-        getContentPane().add(btn_agregarProdutco, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 120, 220, 50));
+        getContentPane().add(btn_agregarProdutco, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 140, 220, 50));
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(0, 0, 0));
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel2.setText("Producto: ");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 80, 90, -1));
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 90, 90, 30));
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(0, 0, 0));
         jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel5.setText("Cantidad: ");
-        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 80, 90, -1));
+        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 90, 90, 30));
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(0, 0, 0));
         jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel6.setText("Cliente: ");
-        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 50, 90, -1));
+        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 50, 90, 30));
 
-        jButton1.setText("Buscar");
-        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 50, -1, 20));
+        btn_buscar.setText("Buscar");
+        btn_buscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_buscarActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btn_buscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 50, -1, 30));
 
         jTextField1.setBackground(new java.awt.Color(255, 255, 255));
         jTextField1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
@@ -260,7 +266,7 @@ public class RegistrarVenta extends javax.swing.JFrame {
         getContentPane().add(btn_registrarVenta, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 220, 220, 70));
 
         jLabel12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/fondo3.jpg"))); // NOI18N
-        getContentPane().add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 210, 730, 380));
+        getContentPane().add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 210, 730, 380));
 
         jLabel14.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/fondo3.jpg"))); // NOI18N
         getContentPane().add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 210, 730, 380));
@@ -269,7 +275,7 @@ public class RegistrarVenta extends javax.swing.JFrame {
         getContentPane().add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 730, 380));
 
         jLabel16.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/fondo3.jpg"))); // NOI18N
-        getContentPane().add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 0, 730, 380));
+        getContentPane().add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 0, 730, 380));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -289,6 +295,29 @@ public class RegistrarVenta extends javax.swing.JFrame {
     private void txt_cantidadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_cantidadActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txt_cantidadActionPerformed
+
+    private void btn_buscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_buscarActionPerformed
+// TODO add your handlng code here:
+        String clienteBuscar = txt_buscar_cliente.getText().trim();
+        Connection cn = Conexion.conectar();
+        String sql = "select nombre, apellido from tb_cliente where cedula = '" + clienteBuscar + "'";
+        Statement st;
+        try {
+            st = cn.createStatement();
+            ResultSet rs = st.executeQuery(sql);
+            if (rs.next()) {
+                jComboBox_cliente.setSelectedItem(rs.getString("nombre") + " " + rs.getString("apellido"));
+            } else {
+                jComboBox_cliente.setSelectedItem("Seleccione cliente:");
+                JOptionPane.showMessageDialog(null, "¡Dni de cliente incorrecto o no encontrado!");
+            }
+
+            txt_buscar_cliente.setText("");
+            cn.close();
+        } catch (Exception e) {
+            System.err.println("Error al buscar cliente" + e);
+        }
+    }//GEN-LAST:event_btn_buscarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -330,9 +359,9 @@ public class RegistrarVenta extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_agregarProdutco;
+    private javax.swing.JButton btn_buscar;
     private javax.swing.JButton btn_calcularCambio;
     private javax.swing.JButton btn_registrarVenta;
-    private javax.swing.JButton jButton1;
     private javax.swing.JComboBox<String> jComboBox_cliente;
     private javax.swing.JComboBox<String> jComboBox_producto;
     private javax.swing.JLabel jLabel1;
@@ -356,9 +385,9 @@ public class RegistrarVenta extends javax.swing.JFrame {
     public static javax.swing.JScrollPane jScrollPane1;
     public static javax.swing.JTable jTable_productos;
     private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField txt_buscar_cliente;
     private javax.swing.JTextField txt_cambio;
     private javax.swing.JTextField txt_cantidad;
-    private javax.swing.JTextField txt_datosClientes;
     private javax.swing.JTextField txt_descuento;
     private javax.swing.JTextField txt_efectivo;
     private javax.swing.JTextField txt_igv;
@@ -382,7 +411,7 @@ public class RegistrarVenta extends javax.swing.JFrame {
             ResultSet rs = st.executeQuery(sql);
             jComboBox_cliente.removeAllItems();
             jComboBox_cliente.addItem("Seleccione cliente:");
-            
+
             while (rs.next()) {
                 jComboBox_cliente.addItem(rs.getString("nombre") + " " + rs.getNString("apellido"));
             }
@@ -392,6 +421,26 @@ public class RegistrarVenta extends javax.swing.JFrame {
             System.err.println("Error al cargar clientes: " + e);
         }
 
+    }
+
+    //metodo para cargar productos en el jComboBox
+    private void CargarComboProductos() {
+        Connection con = Conexion.conectar();
+        String sql = "select * from tb_producto";
+        Statement st;
+        try {
+            st = con.createStatement();
+            ResultSet rs = st.executeQuery(sql);
+            jComboBox_producto.removeAllItems();
+            jComboBox_producto.addItem("Seleccione producto:");
+
+            while (rs.next()) {
+                jComboBox_producto.addItem(rs.getString("nombre"));
+            }
+            con.close();
+        } catch (Exception e) {
+            System.err.println("Error al cargar productos: " + e);
+        }
     }
 
 }
