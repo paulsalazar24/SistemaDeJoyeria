@@ -218,7 +218,7 @@ public class RegistrarVenta extends javax.swing.JFrame {
         btn_agregarProdutco.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         btn_agregarProdutco.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/calcularPro.png"))); // NOI18N
         btn_agregarProdutco.setText("Añadir producto ");
-        getContentPane().add(btn_agregarProdutco, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 140, 220, 50));
+        getContentPane().add(btn_agregarProdutco, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 140, 220, 60));
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(0, 0, 0));
