@@ -22,21 +22,22 @@ public class RegistrarVenta extends javax.swing.JFrame {
 
     public RegistrarVenta() {
         initComponents();
+        //844, 586
         //this.setSize(new Dimension(844, 586));
         this.setTitle("Registrar venta");
         // Agrega la siguiente línea para inicializar jScrollPane1
         jScrollPane1 = new javax.swing.JScrollPane();
         // cargar tabla
-       
+        this.CargarComboCliente();
 
         setLocationRelativeTo(null);
         setResizable(false);
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         //insertar img en el label 
-       // ImageIcon wallpaper = new ImageIcon("src/img/fondo3.jpg");
-       // Icon icono = new ImageIcon(wallpaper.getImage().getScaledInstance(900, 500, WIDTH));
-       // jLabel_wallpaper.setIcon(icono);
-       // this.repaint();
+        // ImageIcon wallpaper = new ImageIcon("src/img/fondo3.jpg");
+         //Icon icono = new ImageIcon(wallpaper.getImage().getScaledInstance(844, 586, WIDTH));
+         //jLabel_wallpaper.setIcon(icono);
+        // this.repaint();
     }
 
     /**
@@ -53,33 +54,32 @@ public class RegistrarVenta extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
-        txt_telefono = new javax.swing.JTextField();
+        txt_cambio = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
-        txt_nombre1 = new javax.swing.JTextField();
+        txt_subTotal = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
-        txt_telefono1 = new javax.swing.JTextField();
-        txt_telefono2 = new javax.swing.JTextField();
+        txt_descuento = new javax.swing.JTextField();
+        txt_igv = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
-        txt_telefono3 = new javax.swing.JTextField();
-        txt_telefono4 = new javax.swing.JTextField();
+        txt_totalPagar = new javax.swing.JTextField();
+        txt_efectivo = new javax.swing.JTextField();
         jLabel10 = new javax.swing.JLabel();
-        jButton2 = new javax.swing.JButton();
+        btn_calcularCambio = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable_clientes = new javax.swing.JTable();
-        jComboBox1 = new javax.swing.JComboBox<>();
-        jComboBox2 = new javax.swing.JComboBox<>();
-        txt_nombre = new javax.swing.JTextField();
-        txt_nombre2 = new javax.swing.JTextField();
+        jTable_productos = new javax.swing.JTable();
+        jComboBox_cliente = new javax.swing.JComboBox<>();
+        jComboBox_producto = new javax.swing.JComboBox<>();
+        txt_cantidad = new javax.swing.JTextField();
+        txt_datosClientes = new javax.swing.JTextField();
         btn_agregarProdutco = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         jTextField1 = new javax.swing.JTextField();
-        jButton3 = new javax.swing.JButton();
-        jTextField2 = new javax.swing.JTextField();
+        btn_registrarVenta = new javax.swing.JButton();
         jLabel12 = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
         jLabel15 = new javax.swing.JLabel();
@@ -104,9 +104,10 @@ public class RegistrarVenta extends javax.swing.JFrame {
         jLabel3.setText("IGV: ");
         jPanel3.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 90, 90, -1));
 
-        txt_telefono.setBackground(new java.awt.Color(255, 255, 255));
-        txt_telefono.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jPanel3.add(txt_telefono, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 180, 170, -1));
+        txt_cambio.setBackground(new java.awt.Color(255, 255, 255));
+        txt_cambio.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        txt_cambio.setEnabled(false);
+        jPanel3.add(txt_cambio, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 180, 170, -1));
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(0, 0, 0));
@@ -114,9 +115,10 @@ public class RegistrarVenta extends javax.swing.JFrame {
         jLabel4.setText("Subtotal: ");
         jPanel3.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, 90, -1));
 
-        txt_nombre1.setBackground(new java.awt.Color(255, 255, 255));
-        txt_nombre1.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jPanel3.add(txt_nombre1, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 30, 170, -1));
+        txt_subTotal.setBackground(new java.awt.Color(255, 255, 255));
+        txt_subTotal.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        txt_subTotal.setEnabled(false);
+        jPanel3.add(txt_subTotal, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 30, 170, -1));
 
         jLabel7.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(0, 0, 0));
@@ -130,13 +132,15 @@ public class RegistrarVenta extends javax.swing.JFrame {
         jLabel8.setText("Descuento: ");
         jPanel3.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 60, 90, -1));
 
-        txt_telefono1.setBackground(new java.awt.Color(255, 255, 255));
-        txt_telefono1.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jPanel3.add(txt_telefono1, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 60, 170, -1));
+        txt_descuento.setBackground(new java.awt.Color(255, 255, 255));
+        txt_descuento.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        txt_descuento.setEnabled(false);
+        jPanel3.add(txt_descuento, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 60, 170, -1));
 
-        txt_telefono2.setBackground(new java.awt.Color(255, 255, 255));
-        txt_telefono2.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jPanel3.add(txt_telefono2, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 90, 170, -1));
+        txt_igv.setBackground(new java.awt.Color(255, 255, 255));
+        txt_igv.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        txt_igv.setEnabled(false);
+        jPanel3.add(txt_igv, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 90, 170, -1));
 
         jLabel9.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(0, 0, 0));
@@ -144,13 +148,14 @@ public class RegistrarVenta extends javax.swing.JFrame {
         jLabel9.setText("Total a pagar: ");
         jPanel3.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 120, 100, -1));
 
-        txt_telefono3.setBackground(new java.awt.Color(255, 255, 255));
-        txt_telefono3.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jPanel3.add(txt_telefono3, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 120, 170, -1));
+        txt_totalPagar.setBackground(new java.awt.Color(255, 255, 255));
+        txt_totalPagar.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        txt_totalPagar.setEnabled(false);
+        jPanel3.add(txt_totalPagar, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 120, 170, -1));
 
-        txt_telefono4.setBackground(new java.awt.Color(255, 255, 255));
-        txt_telefono4.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jPanel3.add(txt_telefono4, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 150, 170, -1));
+        txt_efectivo.setBackground(new java.awt.Color(255, 255, 255));
+        txt_efectivo.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jPanel3.add(txt_efectivo, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 150, 170, -1));
 
         jLabel10.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel10.setForeground(new java.awt.Color(0, 0, 0));
@@ -158,22 +163,22 @@ public class RegistrarVenta extends javax.swing.JFrame {
         jLabel10.setText("Efectivo: ");
         jPanel3.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 150, 100, -1));
 
-        jButton2.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
-        jButton2.setText("Calcular cambio");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        btn_calcularCambio.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
+        btn_calcularCambio.setText("Calcular cambio");
+        btn_calcularCambio.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                btn_calcularCambioActionPerformed(evt);
             }
         });
-        jPanel3.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 210, -1, -1));
+        jPanel3.add(btn_calcularCambio, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 210, -1, -1));
 
-        getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 30, 320, 250));
+        getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 20, 320, 250));
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jTable_clientes.setModel(new javax.swing.table.DefaultTableModel(
+        jTable_productos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -184,25 +189,30 @@ public class RegistrarVenta extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane1.setViewportView(jTable_clientes);
+        jScrollPane1.setViewportView(jTable_productos);
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 670, 250));
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 730, 250));
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 300, 690, 270));
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 300, 750, 270));
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione cliente:", "Item 1", "Item 2", "Item 3", "Item 4" }));
-        getContentPane().add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 50, 150, 20));
+        jComboBox_cliente.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione cliente:", "Item 1", "Item 2", "Item 3", "Item 4" }));
+        getContentPane().add(jComboBox_cliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 50, 150, 20));
 
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione producto:", "Item 1", "Item 2", "Item 3", "Item 4" }));
-        getContentPane().add(jComboBox2, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 80, 150, 20));
+        jComboBox_producto.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione producto:", "Item 1", "Item 2", "Item 3", "Item 4" }));
+        getContentPane().add(jComboBox_producto, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 80, 150, 20));
 
-        txt_nombre.setBackground(new java.awt.Color(255, 255, 255));
-        txt_nombre.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        getContentPane().add(txt_nombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 80, 70, -1));
+        txt_cantidad.setBackground(new java.awt.Color(255, 255, 255));
+        txt_cantidad.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        txt_cantidad.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txt_cantidadActionPerformed(evt);
+            }
+        });
+        getContentPane().add(txt_cantidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 80, 70, -1));
 
-        txt_nombre2.setBackground(new java.awt.Color(255, 255, 255));
-        txt_nombre2.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        getContentPane().add(txt_nombre2, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 50, 170, 20));
+        txt_datosClientes.setBackground(new java.awt.Color(255, 255, 255));
+        txt_datosClientes.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        getContentPane().add(txt_datosClientes, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 50, 170, 20));
 
         btn_agregarProdutco.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         btn_agregarProdutco.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/calcularPro.png"))); // NOI18N
@@ -237,21 +247,17 @@ public class RegistrarVenta extends javax.swing.JFrame {
                 jTextField1ActionPerformed(evt);
             }
         });
-        getContentPane().add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, 490, 170));
+        getContentPane().add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 40, 490, 170));
 
-        jButton3.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/agregarPro.png"))); // NOI18N
-        jButton3.setText("Registrar venta");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        btn_registrarVenta.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        btn_registrarVenta.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/agregarPro.png"))); // NOI18N
+        btn_registrarVenta.setText("Registrar venta");
+        btn_registrarVenta.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                btn_registrarVentaActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 210, 220, 70));
-
-        jTextField2.setBackground(new java.awt.Color(255, 255, 255));
-        jTextField2.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        getContentPane().add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 200, 490, 90));
+        getContentPane().add(btn_registrarVenta, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 220, 220, 70));
 
         jLabel12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/fondo3.jpg"))); // NOI18N
         getContentPane().add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 210, 730, 380));
@@ -268,17 +274,21 @@ public class RegistrarVenta extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void btn_calcularCambioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_calcularCambioActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_btn_calcularCambioActionPerformed
 
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField1ActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+    private void btn_registrarVentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_registrarVentaActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton3ActionPerformed
+    }//GEN-LAST:event_btn_registrarVentaActionPerformed
+
+    private void txt_cantidadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_cantidadActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txt_cantidadActionPerformed
 
     /**
      * @param args the command line arguments
@@ -320,11 +330,11 @@ public class RegistrarVenta extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_agregarProdutco;
+    private javax.swing.JButton btn_calcularCambio;
+    private javax.swing.JButton btn_registrarVenta;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JComboBox<String> jComboBox2;
+    private javax.swing.JComboBox<String> jComboBox_cliente;
+    private javax.swing.JComboBox<String> jComboBox_producto;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel12;
@@ -344,24 +354,44 @@ public class RegistrarVenta extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel3;
     public static javax.swing.JScrollPane jScrollPane1;
-    public static javax.swing.JTable jTable_clientes;
+    public static javax.swing.JTable jTable_productos;
     private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField txt_nombre;
-    private javax.swing.JTextField txt_nombre1;
-    private javax.swing.JTextField txt_nombre2;
-    private javax.swing.JTextField txt_telefono;
-    private javax.swing.JTextField txt_telefono1;
-    private javax.swing.JTextField txt_telefono2;
-    private javax.swing.JTextField txt_telefono3;
-    private javax.swing.JTextField txt_telefono4;
+    private javax.swing.JTextField txt_cambio;
+    private javax.swing.JTextField txt_cantidad;
+    private javax.swing.JTextField txt_datosClientes;
+    private javax.swing.JTextField txt_descuento;
+    private javax.swing.JTextField txt_efectivo;
+    private javax.swing.JTextField txt_igv;
+    private javax.swing.JTextField txt_subTotal;
+    private javax.swing.JTextField txt_totalPagar;
     // End of variables declaration//GEN-END:variables
 
-//metodo para limpiar
+    //metodo para limpiar
     private void Limpiar() {
-        txt_nombre.setText("");
-        txt_telefono.setText("");
-       
+        txt_cantidad.setText("");
+        txt_cambio.setText("");
+    }
+
+    //metodo para cargar clientes en el jComboBox
+    private void CargarComboCliente() {
+        Connection con = Conexion.conectar();
+        String sql = "select * from tb_cliente ";
+        Statement st;
+        try {
+            st = con.createStatement();
+            ResultSet rs = st.executeQuery(sql);
+            jComboBox_cliente.removeAllItems();
+            jComboBox_cliente.addItem("Seleccione cliente:");
+            
+            while (rs.next()) {
+                jComboBox_cliente.addItem(rs.getString("nombre") + " " + rs.getNString("apellido"));
+            }
+            con.close();
+        } catch (Exception e) {
+
+            System.err.println("Error al cargar clientes: " + e);
+        }
+
     }
 
 }
