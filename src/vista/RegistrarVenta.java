@@ -1,44 +1,86 @@
 package vista;
 
 import conexion.Conexion;
-
-import java.awt.Dimension;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import javax.swing.table.DefaultTableModel;
-import java.sql.PreparedStatement;
-import javax.swing.Icon;
-import javax.swing.ImageIcon;
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
-import modelo.Cliente;
+import modelo.DetalleVenta;
 
 public class RegistrarVenta extends javax.swing.JFrame {
 
-    private int idCliente;
+    //modelo de datos
+    private DefaultTableModel modeloDatosProductos;
+
+    //lista para el detalle de venta de productos
+    ArrayList<DetalleVenta> listaProductos = new ArrayList<>();
+    private DetalleVenta producto;
+
+    private int idProducto = 0;
+    private String nombre = "";
+    private int cantidadProductoBBDD = 0;
+    private double precioUnitario = 0.0;
+    private int porcentajeIgv = 0;
+
+    private int cantidad = 0;  //cantidad de productos a comprar
+    private double subtotal = 0.0; // cantidad por precio
+    private double descuento = 0.0;
+    private double igv = 0.0;
+    private double totalPagar = 0.0;
+
+    private int auxIdDetalle = 1; //id del detalle de venta
 
     public RegistrarVenta() {
         initComponents();
-        //844, 586
-        //this.setSize(new Dimension(844, 586));
         this.setTitle("Registrar venta");
         // Agrega la siguiente línea para inicializar jScrollPane1
         jScrollPane1 = new javax.swing.JScrollPane();
         // cargar tabla
         this.CargarComboCliente();
         this.CargarComboProductos();
+        this.inicializarTablaProducto();
 
         setLocationRelativeTo(null);
         setResizable(false);
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        //insertar img en el label 
-        // ImageIcon wallpaper = new ImageIcon("src/img/fondo3.jpg");
-        //Icon icono = new ImageIcon(wallpaper.getImage().getScaledInstance(844, 586, WIDTH));
-        //jLabel_wallpaper.setIcon(icono);
-        // this.repaint();
+    }
+
+    //metodo para mostrar datos en la tabla productos
+    private void inicializarTablaProducto() {
+        modeloDatosProductos = new DefaultTableModel();
+        //agregamos columnas 
+        modeloDatosProductos.addColumn("NRO.");
+        modeloDatosProductos.addColumn("Nombre");
+        modeloDatosProductos.addColumn("Cantidad");
+        modeloDatosProductos.addColumn("P. unitario");
+        modeloDatosProductos.addColumn("Descuento");
+        modeloDatosProductos.addColumn("IGV");
+        modeloDatosProductos.addColumn("Total pagar");
+        modeloDatosProductos.addColumn("Accion");
+
+        //agregar datos del modelo en la tabla 
+        RegistrarVenta.jTable_productos.setModel(modeloDatosProductos);
+    }
+
+    //metodo para presentar informacion en la tabla - productos seleccionados
+    private void listaTablaProductos() {
+        this.modeloDatosProductos.setRowCount(listaProductos.size());
+        for (int i = 0; i < listaProductos.size(); i++) {
+            this.modeloDatosProductos.setValueAt(i + 1, i, 0);
+            this.modeloDatosProductos.setValueAt(listaProductos.get(i).getNombre(), i, 1);
+            this.modeloDatosProductos.setValueAt(listaProductos.get(i).getCantidad(), i, 2);
+            this.modeloDatosProductos.setValueAt(listaProductos.get(i).getPrecioUnitario(), i, 3);
+            this.modeloDatosProductos.setValueAt(listaProductos.get(i).getSubtotal(), i, 4);
+            this.modeloDatosProductos.setValueAt(listaProductos.get(i).getDescuento(), i, 5);
+            this.modeloDatosProductos.setValueAt(listaProductos.get(i).getIgv(), i, 6);
+            this.modeloDatosProductos.setValueAt(listaProductos.get(i).getTotalPagar(), i, 7);
+            this.modeloDatosProductos.setValueAt("ELIMINAR", i, 8); //Aqui se eliminara el producto seleccionado
+        }
+        //añador al jTable
+        jTable_productos.setModel(modeloDatosProductos);
     }
 
     /**
@@ -218,6 +260,11 @@ public class RegistrarVenta extends javax.swing.JFrame {
         btn_agregarProdutco.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         btn_agregarProdutco.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/calcularPro.png"))); // NOI18N
         btn_agregarProdutco.setText("Añadir producto ");
+        btn_agregarProdutco.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_agregarProdutcoActionPerformed(evt);
+            }
+        });
         getContentPane().add(btn_agregarProdutco, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 140, 220, 60));
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
@@ -318,6 +365,83 @@ public class RegistrarVenta extends javax.swing.JFrame {
             System.err.println("Error al buscar cliente" + e);
         }
     }//GEN-LAST:event_btn_buscarActionPerformed
+
+    private void btn_agregarProdutcoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_agregarProdutcoActionPerformed
+        try {
+            String combo = this.jComboBox_producto.getSelectedItem().toString();
+            //validar la seleccion del producto
+            if (combo.equalsIgnoreCase("Seleccione producto:")) {
+                JOptionPane.showMessageDialog(null, "Seleccione producto");
+            } else {
+                //validar que ingrese una cantidad
+                if (!txt_cantidad.getText().isEmpty()) {
+                    //validar que no ingrese caracteres no numericos
+                    boolean validacion = validar(txt_cantidad.getText());
+                    if (validacion == true) {
+                        //validar que la cantidad sea mayor a 0 
+                        if (Integer.parseInt(txt_cantidad.getText()) > 0) {
+                            cantidad = Integer.parseInt(txt_cantidad.getText());
+                            //ejecutar el metodo para obtener datos del producto
+                            this.DatosDelProducto();
+                            //validar de cantidad de productos selecionados no sea mayor a ala base de datos
+                            if (cantidad <= cantidadProductoBBDD) {
+                                subtotal = precioUnitario * cantidad;
+                                totalPagar = subtotal + igv + descuento;
+
+                                //redondeamos decimales 
+                                subtotal = (double) Math.round(subtotal * 100) / 100; //redondemaos a 2 decimales
+                                igv = (double) Math.round(igv * 100) / 100;
+                                descuento = (double) Math.round(descuento * 100) / 100;
+                                totalPagar = (double) Math.round(totalPagar * 100) / 100;
+
+                                //crear un nuevo producto
+                                producto = new DetalleVenta(auxIdDetalle,
+                                1,
+                                idProducto,
+                                nombre,
+                                Integer.parseInt(txt_cantidad.getText()),
+                                precioUnitario,
+                                subtotal,
+                                descuento,
+                                igv,
+                                totalPagar,
+                                1);
+
+                                //agregar a la lisat de productos
+                                listaProductos.add(producto);
+
+                                JOptionPane.showMessageDialog(null, "Productos agregado");
+                                
+                                auxIdDetalle++;
+                                txt_cantidad.setText(""); //LIMPIAR CAMPO DE LA CANTIDAD
+
+                                //volver a cargar el combo de productos
+                                this.CargarComboProductos();
+                            } else {
+                                JOptionPane.showMessageDialog(null, "La cantidad supera el stock");
+                            }
+
+                        } else {
+                            JOptionPane.showMessageDialog(null, "La cantidad no puede ser cero (0), tampoco negativo");
+                        }
+                    } else {
+                        JOptionPane.showMessageDialog(null, "En la cantidad no se admiten caracteres no númerico");
+                    }
+
+                } else {
+                    JOptionPane.showMessageDialog(null, "Ingresa la cantidad del producto");
+                }
+
+            }
+
+            this.listaTablaProductos();
+
+        } catch (Exception e) {
+            System.err.println("Error al cargar en la tabla productos: " + e);
+
+        }
+
+    }//GEN-LAST:event_btn_agregarProdutcoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -441,6 +565,52 @@ public class RegistrarVenta extends javax.swing.JFrame {
         } catch (Exception e) {
             System.err.println("Error al cargar productos: " + e);
         }
+    }
+
+    // creamois metodo para validar cantidad
+    private boolean validar(String valor) {
+        try {
+            int num = Integer.parseInt(valor);
+            return true;
+        } catch (NumberFormatException e) {
+            return false;
+        }
+    }
+
+    //metodo para mostrar los datos del producto
+    private void DatosDelProducto() {
+        try {
+            String sql = "select * from tb_producto where nombre = '" + this.jComboBox_producto.getSelectedItem() + "'";
+            Connection cn = Conexion.conectar();
+            Statement st;
+            st = cn.createStatement();  // Inicializar el Statement aquí
+            ResultSet rs = st.executeQuery(sql);
+            while (rs.next()) {
+                idProducto = rs.getInt("idProducto");
+                nombre = rs.getString("nombre");
+                cantidadProductoBBDD = rs.getInt("cantidad");
+                precioUnitario = rs.getDouble("precio");
+                porcentajeIgv = rs.getInt("porcentajeIgv");
+                this.CalcularIgv(precioUnitario, porcentajeIgv); // calcula y retorna el igv
+
+            }
+        } catch (SQLException e) {
+            System.out.println("Error al obtener datos del producto" + e);
+        }
+    }
+
+    //metodo para calcular el igv del producto
+    private double CalcularIgv(double precio, int porcentajeIgv) {
+        int p_igv = porcentajeIgv;
+        switch (p_igv) {
+            case 0 ->
+                igv = 0.0;
+            case 18 ->
+                igv = (precio * cantidad) * 0.18;
+            default -> {
+            }
+        }
+        return igv;
     }
 
 }

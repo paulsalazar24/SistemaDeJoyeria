@@ -1,48 +1,46 @@
-package controlador;
+package modelo;
 
 public class DetalleVenta {
 
     //Atributos
     private int idDetalleVenta;
     private int idCabeceraVenta;
-    private int idCebecera;
+    private int idProducto;
 
     //agregar mas 
     private String nombre;
     private int cantidad;
-    private double subtotal;
     private double precioUnitario;
+    private double subtotal;
     private double descuento;
     private double igv;
     private double totalPagar;
     private int estado;
-    
-    
+
     //constructor
-    public DetalleVenta(){
+    public DetalleVenta() {
         this.idDetalleVenta = 0;
         this.idCabeceraVenta = 0;
-        this.idCebecera = 0;
-        this.nombre ="";
+        this.idProducto = 0;
+        this.nombre = "";
         this.cantidad = 0;
-        this.subtotal = 0.0;
         this.precioUnitario = 0.0;
+        this.subtotal = 0.0;
         this.descuento = 0;
         this.igv = 0.0;
         this.totalPagar = 0.0;
         this.estado = 0;
     }
-    
     //constructor sobrecargado
 
-    public DetalleVenta(int idDetalleVenta, int idCabeceraVenta, int idCebecera, String nombre, int cantidad, double subtotal, double precioUnitario, double descuento, double igv, double totalPagar, int estado) {
+    public DetalleVenta(int idDetalleVenta, int idCabeceraVenta, int idProducto, String nombre, int cantidad, double precioUnitario, double subtotal, double descuento, double igv,  double totalPagar, int estado) {
         this.idDetalleVenta = idDetalleVenta;
         this.idCabeceraVenta = idCabeceraVenta;
-        this.idCebecera = idCebecera;
+        this.idProducto = idProducto;
         this.nombre = nombre;
         this.cantidad = cantidad;
-        this.subtotal = subtotal;
         this.precioUnitario = precioUnitario;
+        this.subtotal = subtotal;
         this.descuento = descuento;
         this.igv = igv;
         this.totalPagar = totalPagar;
@@ -67,12 +65,12 @@ public class DetalleVenta {
         this.idCabeceraVenta = idCabeceraVenta;
     }
 
-    public int getIdCebecera() {
-        return idCebecera;
+    public int getIdProducto() {
+        return idProducto;
     }
 
-    public void setIdCebecera(int idCebecera) {
-        this.idCebecera = idCebecera;
+    public void setIdProducto(int idProducto) {
+        this.idProducto = idProducto;
     }
 
     public String getNombre() {
@@ -91,20 +89,20 @@ public class DetalleVenta {
         this.cantidad = cantidad;
     }
 
-    public double getSubtotal() {
-        return subtotal;
-    }
-
-    public void setSubtotal(double subtotal) {
-        this.subtotal = subtotal;
-    }
-
     public double getPrecioUnitario() {
         return precioUnitario;
     }
 
     public void setPrecioUnitario(double precioUnitario) {
         this.precioUnitario = precioUnitario;
+    }
+
+    public double getSubtotal() {
+        return subtotal;
+    }
+
+    public void setSubtotal(double subtotal) {
+        this.subtotal = subtotal;
     }
 
     public double getDescuento() {
@@ -138,15 +136,13 @@ public class DetalleVenta {
     public void setEstado(int estado) {
         this.estado = estado;
     }
-    
+
     //toSTRING
 
     @Override
     public String toString() {
-        return "DetalleVenta{" + "idDetalleVenta=" + idDetalleVenta + ", idCabeceraVenta=" + idCabeceraVenta + ", idCebecera=" + idCebecera + ", nombre=" + nombre + ", cantidad=" + cantidad + ", subtotal=" + subtotal + ", precioUnitario=" + precioUnitario + ", descuento=" + descuento + ", igv=" + igv + ", totalPagar=" + totalPagar + ", estado=" + estado + '}';
+        return "DetalleVenta{" + "idDetalleVenta=" + idDetalleVenta + ", idCabeceraVenta=" + idCabeceraVenta + ", idProducto=" + idProducto + ", nombre=" + nombre + ", cantidad=" + cantidad + ", precioUnitario=" + precioUnitario + ", subtotal=" + subtotal + ", descuento=" + descuento + ", igv=" + igv + ", totalPagar=" + totalPagar + ", estado=" + estado + '}';
     }
-    
-    
     
     
     

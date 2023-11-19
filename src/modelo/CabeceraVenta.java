@@ -1,5 +1,5 @@
 
-package controlador;
+package modelo;
 
 
 public class CabeceraVenta {
@@ -71,6 +71,8 @@ public class CabeceraVenta {
     public void setEstado(int estado) {
         this.estado = estado;
     }
+
+    
     
     //toString
 
