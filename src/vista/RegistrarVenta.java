@@ -1,13 +1,18 @@
 package vista;
 
 import conexion.Conexion;
+import controlador.Ctrl_RegistrarVenta;
+import java.lang.ref.Cleaner;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.SimpleDateFormat;
 import javax.swing.table.DefaultTableModel;
 import java.util.ArrayList;
+import java.util.Date;
 import javax.swing.JOptionPane;
+import modelo.CabeceraVenta;
 import modelo.DetalleVenta;
 
 public class RegistrarVenta extends javax.swing.JFrame {
@@ -18,6 +23,8 @@ public class RegistrarVenta extends javax.swing.JFrame {
     //lista para el detalle de venta de productos
     ArrayList<DetalleVenta> listaProductos = new ArrayList<>();
     private DetalleVenta producto;
+
+    private int idCliente = 0;
 
     private int idProducto = 0;
     private String nombre = "";
@@ -381,7 +388,70 @@ public class RegistrarVenta extends javax.swing.JFrame {
     }//GEN-LAST:event_jTextField1ActionPerformed
 
     private void btn_registrarVentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_registrarVentaActionPerformed
-        // TODO add your handling code here:
+        CabeceraVenta cabeceraVenta = new CabeceraVenta();
+        DetalleVenta detalleVenta = new DetalleVenta();
+        Ctrl_RegistrarVenta controlVenta = new Ctrl_RegistrarVenta();
+        String fechaActual = "";
+        Date date = new Date();
+        fechaActual = new SimpleDateFormat("yyyy/MM/dd").format(date);
+        if (!jComboBox_cliente.getSelectedItem().equals("Seleccione cliente:")) {
+            if (listaProductos.size() > 0) {
+                
+                //metodo para obtener el id del cliente
+                this.ObtenerIdCliente();
+                //registrar la cabecera de la venta
+                cabeceraVenta.setIdCabeceraVenta(0);
+                cabeceraVenta.setIdCliente(idCliente);
+                cabeceraVenta.setValorPagar(Double.parseDouble(txt_totalPagar.getText()));
+                cabeceraVenta.setFechaVenta(fechaActual);
+                cabeceraVenta.setEstado(1);
+                if (controlVenta.guardar(cabeceraVenta)) {
+                    JOptionPane.showMessageDialog(null, "¡Cabecera registrada!");
+                    
+                    //guardar detalle venta
+                    for (DetalleVenta elemento : listaProductos) {
+                        detalleVenta.setIdDetalleVenta(0);
+                        detalleVenta.setIdCabeceraVenta(0);
+                        detalleVenta.setIdProducto(elemento.getIdProducto());
+                        detalleVenta.setCantidad(elemento.getCantidad());
+                        detalleVenta.setPrecioUnitario(elemento.getPrecioUnitario());
+                        detalleVenta.setSubtotal(elemento.getSubtotal());
+                        detalleVenta.setDescuento(elemento.getDescuento());
+                        detalleVenta.setIgv(elemento.getIgv());
+                        detalleVenta.setTotalPagar(elemento.getTotalPagar());
+                        detalleVenta.setEstado(1);
+                        
+                        if (controlVenta.guardarDetalle(detalleVenta)) {
+                            System.err.println("Detalle de venta registrado");
+                            
+                            txt_subTotal.setText("0.0");
+                            txt_igv.setText("0.0");
+                            txt_descuento.setText("0.0");
+                            txt_totalPagar.setText("0.0");
+                            txt_efectivo.setText(" ");
+                            txt_cambio.setText("0.0");
+                            auxIdDetalle = 1;
+                            
+                            this.CargarComboCliente();
+                            
+                        } else {
+                            JOptionPane.showMessageDialog(null, "¡Error al guardar detalle de venta!");
+                        }
+                    }
+                    //vaciamos la lista
+                    listaProductos.clear();
+                    listaTablaProductos();
+                    
+                } else {
+                    JOptionPane.showMessageDialog(null, "¡Error al guardar cabecera de venta!");
+                }
+            } else {
+                JOptionPane.showMessageDialog(null, "¡Seleccione un producto!");
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "¡Seleccione un cliente!");
+        }
+
     }//GEN-LAST:event_btn_registrarVentaActionPerformed
 
     private void txt_cantidadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_cantidadActionPerformed
@@ -714,13 +784,30 @@ public class RegistrarVenta extends javax.swing.JFrame {
         txt_totalPagar.setText(String.valueOf(totalpagarGeneral));
     }
 
-    // creamois metodo para validar cantidad
+    //  metodo para validar cantidad
     private boolean validarDouble(String valor) {
         try {
             double num = Double.parseDouble(valor);
             return true;
         } catch (NumberFormatException e) {
             return false;
+        }
+    }
+
+    //metodo para obtener id del cliente
+    private void ObtenerIdCliente() {
+        try {
+            String sql = "select * from tb_cliente where concat(nombre, ' ', apellido) = '" + this.jComboBox_cliente.getSelectedItem() + "'";
+            Connection cn = Conexion.conectar();
+            Statement st;
+            st = cn.createStatement();  // Inicializar el Statement aquí
+            ResultSet rs = st.executeQuery(sql);
+            while (rs.next()) {
+                idCliente = rs.getInt("idCliente");
+            }
+
+        } catch (SQLException e) {
+            System.out.println("Error al obtener id del cliente: " + e);
         }
     }
 

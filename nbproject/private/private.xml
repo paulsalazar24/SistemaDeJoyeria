@@ -5,7 +5,6 @@
         <group>
             <file>file:/D:/laragon/www/SistemaDeJoyeria/src/controlador/Ctrl_RegistrarVenta.java</file>
             <file>file:/D:/laragon/www/SistemaDeJoyeria/src/vista/RegistrarVenta.java</file>
-            <file>file:/D:/laragon/www/SistemaDeJoyeria/src/modelo/DetalleVenta.java</file>
             <file>file:/D:/laragon/www/SistemaDeJoyeria/src/modelo/CabeceraVenta.java</file>
         </group>
     </open-files>
