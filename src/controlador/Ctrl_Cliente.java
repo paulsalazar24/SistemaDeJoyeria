@@ -8,9 +8,10 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import modelo.Cliente;
 
-//metodo para guardar un nuevo cliente
-public class Ctrl_Cliente {
 
+public class Ctrl_Cliente {
+    
+//metodo para guardar un nuevo cliente
     public boolean guardar(Cliente objeto) {
         boolean respuesta = false;
         Connection cn = Conexion.conectar();

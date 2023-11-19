@@ -33,6 +33,13 @@ public class RegistrarVenta extends javax.swing.JFrame {
 
     private int auxIdDetalle = 1; //id del detalle de venta
 
+    //variables globales para calculos 
+    private double subtotalGeneral = 0.0;
+    private double descuentoGeneral = 0.0;
+    private double igvGeneral = 0.0;
+    private double totalpagarGeneral = 0.0;
+
+    //fin
     public RegistrarVenta() {
         initComponents();
         this.setTitle("Registrar venta");
@@ -42,6 +49,14 @@ public class RegistrarVenta extends javax.swing.JFrame {
         this.CargarComboCliente();
         this.CargarComboProductos();
         this.inicializarTablaProducto();
+
+        txt_efectivo.setEnabled(false);
+        btn_calcularCambio.setEnabled(false);
+
+        txt_subTotal.setText("0.0");
+        txt_igv.setText("0.0");
+        txt_descuento.setText("0.0");
+        txt_totalPagar.setText("0.0");
 
         setLocationRelativeTo(null);
         setResizable(false);
@@ -56,6 +71,7 @@ public class RegistrarVenta extends javax.swing.JFrame {
         modeloDatosProductos.addColumn("Nombre");
         modeloDatosProductos.addColumn("Cantidad");
         modeloDatosProductos.addColumn("P. unitario");
+        modeloDatosProductos.addColumn("subTotal");
         modeloDatosProductos.addColumn("Descuento");
         modeloDatosProductos.addColumn("IGV");
         modeloDatosProductos.addColumn("Total pagar");
@@ -80,6 +96,7 @@ public class RegistrarVenta extends javax.swing.JFrame {
             this.modeloDatosProductos.setValueAt("ELIMINAR", i, 8); //Aqui se eliminara el producto seleccionado
         }
         //añador al jTable
+
         jTable_productos.setModel(modeloDatosProductos);
     }
 
@@ -232,6 +249,11 @@ public class RegistrarVenta extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        jTable_productos.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTable_productosMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(jTable_productos);
 
         jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 730, 250));
@@ -328,7 +350,30 @@ public class RegistrarVenta extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btn_calcularCambioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_calcularCambioActionPerformed
-        // TODO add your handling code here:
+        if (!txt_efectivo.getText().isEmpty()) {
+            //validamos que el usuario no ingrese otro caracteres no numericos 
+            boolean validacion = validarDouble(txt_efectivo.getText());
+            if (validacion == true) {
+                //validar que el efectivo sea mayor al total a pagar
+                double efc = Double.parseDouble(txt_efectivo.getText().trim());
+                double top = Double.parseDouble(txt_totalPagar.getText().trim());
+
+                if (efc < top) {
+                    JOptionPane.showMessageDialog(null, "El dinero en efectivo no es suficiente");
+                } else {
+                    double cambio = (efc - top);
+                    double cambi = (double) Math.round(cambio * 100) / 100;
+                    String camb = String.valueOf(cambi);
+                    txt_cambio.setText(camb);
+                }
+
+            } else {
+                JOptionPane.showMessageDialog(null, "No se admiten caractericos no numericos");
+            }
+
+        } else {
+            JOptionPane.showMessageDialog(null, "Ingrese dinero en efectivo para calcular cambio");
+        }
     }//GEN-LAST:event_btn_calcularCambioActionPerformed
 
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
@@ -396,27 +441,35 @@ public class RegistrarVenta extends javax.swing.JFrame {
 
                                 //crear un nuevo producto
                                 producto = new DetalleVenta(auxIdDetalle,
-                                1,
-                                idProducto,
-                                nombre,
-                                Integer.parseInt(txt_cantidad.getText()),
-                                precioUnitario,
-                                subtotal,
-                                descuento,
-                                igv,
-                                totalPagar,
-                                1);
+                                        1,
+                                        idProducto,
+                                        nombre,
+                                        Integer.parseInt(txt_cantidad.getText()),
+                                        precioUnitario,
+                                        subtotal,
+                                        descuento,
+                                        igv,
+                                        totalPagar,
+                                        1);
+
+                                System.out.println("producto datos: " + producto);
 
                                 //agregar a la lisat de productos
                                 listaProductos.add(producto);
 
                                 JOptionPane.showMessageDialog(null, "Productos agregado");
-                                
+
                                 auxIdDetalle++;
                                 txt_cantidad.setText(""); //LIMPIAR CAMPO DE LA CANTIDAD
 
                                 //volver a cargar el combo de productos
                                 this.CargarComboProductos();
+                                this.CalcularTotalPagar();
+
+                                //
+                                txt_efectivo.setEnabled(true);
+                                btn_calcularCambio.setEnabled(true);
+
                             } else {
                                 JOptionPane.showMessageDialog(null, "La cantidad supera el stock");
                             }
@@ -442,6 +495,30 @@ public class RegistrarVenta extends javax.swing.JFrame {
         }
 
     }//GEN-LAST:event_btn_agregarProdutcoActionPerformed
+
+    int idArrayList = 0;
+
+    private void jTable_productosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable_productosMouseClicked
+        int fila_point = jTable_productos.rowAtPoint(evt.getPoint());
+        int columna_point = 0;
+        if (fila_point > -1) {
+            idArrayList = (int) modeloDatosProductos.getValueAt(fila_point, columna_point);
+        }
+
+        int opcion = JOptionPane.showConfirmDialog(null, "¿Eliminar producto?");
+        //opciones de ConfirmDialog - (si = 0, no =1, cancel = 2, close = -1)
+        switch (opcion) {
+            case 0: // PRECIONE SI
+                listaProductos.remove(idArrayList - 1);
+                this.CalcularTotalPagar();
+                this.listaTablaProductos();
+                break;
+            case 1: //PRECIONE NO
+                break;
+            default: //PRECIONE CANCEL O CLOSE
+                break;
+        }
+    }//GEN-LAST:event_jTable_productosMouseClicked
 
     /**
      * @param args the command line arguments
@@ -592,8 +669,8 @@ public class RegistrarVenta extends javax.swing.JFrame {
                 precioUnitario = rs.getDouble("precio");
                 porcentajeIgv = rs.getInt("porcentajeIgv");
                 this.CalcularIgv(precioUnitario, porcentajeIgv); // calcula y retorna el igv
-
             }
+            System.out.println("igv: " + porcentajeIgv);
         } catch (SQLException e) {
             System.out.println("Error al obtener datos del producto" + e);
         }
@@ -611,6 +688,40 @@ public class RegistrarVenta extends javax.swing.JFrame {
             }
         }
         return igv;
+    }
+
+    //metodo para calcular venta 
+    private void CalcularTotalPagar() {
+        subtotalGeneral = 0;
+        descuentoGeneral = 0;
+        igvGeneral = 0;
+        totalpagarGeneral = 0;
+        for (DetalleVenta elemento : listaProductos) {
+            subtotalGeneral += elemento.getSubtotal();
+            descuentoGeneral += elemento.getDescuento();
+            igvGeneral += elemento.getIgv();
+            totalpagarGeneral += elemento.getTotalPagar();
+        }
+        //redondear decimales
+        subtotalGeneral = (double) Math.round(subtotalGeneral * 100) / 100;
+        igvGeneral = (double) Math.round(igvGeneral * 100) / 100;
+        descuentoGeneral = (double) Math.round(descuentoGeneral * 100) / 100;
+        totalpagarGeneral = (double) Math.round(totalpagarGeneral * 100) / 100;
+        // enviar datos a la vista 
+        txt_subTotal.setText(String.valueOf(subtotalGeneral));
+        txt_igv.setText(String.valueOf(igvGeneral));
+        txt_descuento.setText(String.valueOf(descuentoGeneral));
+        txt_totalPagar.setText(String.valueOf(totalpagarGeneral));
+    }
+
+    // creamois metodo para validar cantidad
+    private boolean validarDouble(String valor) {
+        try {
+            double num = Double.parseDouble(valor);
+            return true;
+        } catch (NumberFormatException e) {
+            return false;
+        }
     }
 
 }
