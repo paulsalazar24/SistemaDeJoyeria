@@ -3,9 +3,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+            <file>file:/D:/laragon/www/SistemaDeJoyeria/src/controlador/Ctrl_Cliente.java</file>
+            <file>file:/D:/laragon/www/SistemaDeJoyeria/src/controlador/Ctrl_Categoria.java</file>
             <file>file:/D:/laragon/www/SistemaDeJoyeria/src/controlador/Ctrl_RegistrarVenta.java</file>
-            <file>file:/D:/laragon/www/SistemaDeJoyeria/src/vista/RegistrarVenta.java</file>
-            <file>file:/D:/laragon/www/SistemaDeJoyeria/src/modelo/CabeceraVenta.java</file>
+            <file>file:/D:/laragon/www/SistemaDeJoyeria/src/conexion/Conexion.java</file>
         </group>
     </open-files>
 </project-private>
