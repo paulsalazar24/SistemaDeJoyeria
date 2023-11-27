@@ -1,5 +1,6 @@
 package vista;
 
+import com.mysql.jdbc.PreparedStatement;
 import conexion.Conexion;
 import controlador.Ctrl_RegistrarVenta;
 import java.lang.ref.Cleaner;
@@ -428,6 +429,7 @@ public class RegistrarVenta extends javax.swing.JFrame {
                             auxIdDetalle = 1;
                             
                             this.CargarComboCliente();
+                            this.RestarStockProductos(elemento.getIdProducto(), elemento.getCantidad());
                             
                         } else {
                             JOptionPane.showMessageDialog(null, "¡Error al guardar detalle de venta!");
@@ -795,7 +797,7 @@ public class RegistrarVenta extends javax.swing.JFrame {
             String sql = "select * from tb_cliente where concat(nombre, ' ', apellido) = '" + this.jComboBox_cliente.getSelectedItem() + "'";
             Connection cn = Conexion.conectar();
             Statement st;
-            st = cn.createStatement();  // Inicializar el Statement aquí
+            st = cn.createStatement();  
             ResultSet rs = st.executeQuery(sql);
             while (rs.next()) {
                 idCliente = rs.getInt("idCliente");
@@ -805,5 +807,41 @@ public class RegistrarVenta extends javax.swing.JFrame {
             System.out.println("Error al obtener id del cliente: " + e);
         }
     }
-
+    
+    //metodo para restar stock de producto
+    private void RestarStockProductos(int idProducto, int cantidad){
+        int cantidadProductosBD = 0;
+        try {
+            String sql = "select idProducto, cantidad from tb_producto where idProducto = '" + idProducto + "'";
+            Connection cn = Conexion.conectar();
+            Statement st;
+            st = cn.createStatement();  
+            ResultSet rs = st.executeQuery(sql);
+            while(rs.next()){
+                 cantidadProductosBD = rs.getInt("cantidad");
+            }
+            cn.close();
+            
+            
+         } catch (SQLException e) {
+            System.out.println("Error al restar cantidad de stock: " + e);
+        }
+        
+        
+        try {
+             Connection cn = Conexion.conectar();
+             PreparedStatement consulta = (PreparedStatement) cn.prepareStatement("update tb_producto set cantidad =? where idProducto = '" + idProducto +"'");
+             int cantidadNueva = cantidadProductosBD - cantidad;
+             consulta.setInt(1, cantidadNueva);
+             
+             if(consulta.executeUpdate() > 0){
+                 System.out.println("Todo bien. ");
+             }
+             
+             
+             
+         } catch (SQLException e) {
+            System.out.println("Error al restar cantidad de stock 2: " + e);
+        }
+    }
 }
