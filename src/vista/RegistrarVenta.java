@@ -3,6 +3,7 @@ package vista;
 import com.mysql.jdbc.PreparedStatement;
 import conexion.Conexion;
 import controlador.Ctrl_RegistrarVenta;
+import controlador.ventaPDF;
 import java.lang.ref.Cleaner;
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -402,7 +403,12 @@ public class RegistrarVenta extends javax.swing.JFrame {
                 cabeceraVenta.setFechaVenta(fechaActual);
                 cabeceraVenta.setEstado(1);
                 if (controlVenta.guardar(cabeceraVenta)) {
-                    JOptionPane.showMessageDialog(null, "¡Cabecera registrada!");
+                    JOptionPane.showMessageDialog(null, "¡Venta registrada!");
+                    
+                    //generar la factura
+                    ventaPDF pdf = new ventaPDF();
+                    pdf.DatosCliente(idCliente);
+                    pdf.generadorFacturaPDF();
                     
                     //guardar detalle venta
                     for (DetalleVenta elemento : listaProductos) {
@@ -660,7 +666,7 @@ public class RegistrarVenta extends javax.swing.JFrame {
     private javax.swing.JTextField txt_efectivo;
     private javax.swing.JTextField txt_igv;
     private javax.swing.JTextField txt_subTotal;
-    private javax.swing.JTextField txt_totalPagar;
+    public static javax.swing.JTextField txt_totalPagar;
     // End of variables declaration//GEN-END:variables
 
     //metodo para limpiar

@@ -161,10 +161,20 @@ public class gestionarProducto extends javax.swing.JFrame {
 
         jComboBox_igv.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jComboBox_igv.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecione IGV:", "Sin IGV", "18%" }));
+        jComboBox_igv.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox_igvActionPerformed(evt);
+            }
+        });
         jPanel3.add(jComboBox_igv, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 20, 150, -1));
 
         jComboBox_categoria.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jComboBox_categoria.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "--Seleccione categoria--", "1", "2", "3" }));
+        jComboBox_categoria.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione categoria:", "1", " " }));
+        jComboBox_categoria.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox_categoriaActionPerformed(evt);
+            }
+        });
         jPanel3.add(jComboBox_categoria, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 50, 150, -1));
 
         jButton_actualizar.setBackground(new java.awt.Color(255, 255, 255));
@@ -291,6 +301,14 @@ public class gestionarProducto extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jButton_eliminarActionPerformed
 
+    private void jComboBox_categoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox_categoriaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBox_categoriaActionPerformed
+
+    private void jComboBox_igvActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox_igvActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBox_igvActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -355,8 +373,8 @@ public class gestionarProducto extends javax.swing.JFrame {
         txt_cantidad.setText("");
         txt_precio.setText("");
         txt_descripcion.setText("");
-        jComboBox_igv.setSelectedItem("Seleccione Igv: ");
-        jComboBox_categoria.setSelectedItem("Seleccione categoria: ");
+        jComboBox_igv.setSelectedItem("Seleccione Igv:");
+        jComboBox_categoria.setSelectedItem("Seleccione categoria:");
     }
 
 //cargar las categorias 
@@ -364,22 +382,20 @@ public class gestionarProducto extends javax.swing.JFrame {
         Connection cn = Conexion.conectar();
         String sql = "select * from tb_categoria";
         Statement st;
-
         try {
             st = cn.createStatement();
             ResultSet rs = st.executeQuery(sql);
-            jComboBox_categoria.removeAll();
-            jComboBox_categoria.addItem("Seleccione categoria: ");
+            // Limpiar el JComboBox antes de cargar las nuevas categorías
+            jComboBox_categoria.removeAllItems();
+            // Agregar la opción por defecto
+            jComboBox_categoria.addItem("Seleccione categoria:");
             while (rs.next()) {
                 jComboBox_categoria.addItem(rs.getString("descripcion"));
             }
             cn.close();
-
         } catch (SQLException e) {
             System.err.println("Error al cargar categorias: " + e);
-
         }
-
     }
 
     //metodo para mostrar todas los productos registrados
